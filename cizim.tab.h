@@ -70,35 +70,51 @@ extern int yydebug;
     VE = 271,                      /* VE  */
     VEYA = 272,                    /* VEYA  */
     DEGIL = 273,                   /* DEGIL  */
-    SAYI = 274,                    /* SAYI  */
-    METIN = 275,                   /* METIN  */
-    ID = 276,                      /* ID  */
-    BLOK_BAS = 277,                /* BLOK_BAS  */
-    BLOK_BIT = 278,                /* BLOK_BIT  */
-    EGER = 279,                    /* EGER  */
-    ISE = 280,                     /* ISE  */
-    AKSI_HALDE = 281,              /* AKSI_HALDE  */
-    DONGU = 282,                   /* DONGU  */
-    IKEN = 283,                    /* IKEN  */
-    NEKI = 284,                    /* NEKI  */
-    FONK = 285,                    /* FONK  */
-    KNOF = 286,                    /* KNOF  */
-    IKI_NOKTA = 287,               /* IKI_NOKTA  */
-    DONDUR = 288,                  /* DONDUR  */
-    TUS_YUKARI = 289,              /* TUS_YUKARI  */
-    TUS_ASAGI = 290,               /* TUS_ASAGI  */
-    TUS_SOLA = 291,                /* TUS_SOLA  */
-    TUS_SAGA = 292,                /* TUS_SAGA  */
-    PARANTEZ_AC = 293,             /* PARANTEZ_AC  */
-    PARANTEZ_KAPA = 294,           /* PARANTEZ_KAPA  */
-    SATIRSONU = 295                /* SATIRSONU  */
+    TAMSAYI = 274,                 /* TAMSAYI  */
+    ONDALIK = 275,                 /* ONDALIK  */
+    METIN = 276,                   /* METIN  */
+    ID = 277,                      /* ID  */
+    BLOK_BAS = 278,                /* BLOK_BAS  */
+    BLOK_BIT = 279,                /* BLOK_BIT  */
+    EGER = 280,                    /* EGER  */
+    ISE = 281,                     /* ISE  */
+    AKSI_HALDE = 282,              /* AKSI_HALDE  */
+    DONGU = 283,                   /* DONGU  */
+    IKEN = 284,                    /* IKEN  */
+    NEKI = 285,                    /* NEKI  */
+    FONK = 286,                    /* FONK  */
+    KNOF = 287,                    /* KNOF  */
+    IKI_NOKTA = 288,               /* IKI_NOKTA  */
+    DONDUR = 289,                  /* DONDUR  */
+    TUS_YUKARI = 290,              /* TUS_YUKARI  */
+    TUS_ASAGI = 291,               /* TUS_ASAGI  */
+    TUS_SOLA = 292,                /* TUS_SOLA  */
+    TUS_SAGA = 293,                /* TUS_SAGA  */
+    PARANTEZ_AC = 294,             /* PARANTEZ_AC  */
+    PARANTEZ_KAPA = 295,           /* PARANTEZ_KAPA  */
+    SATIRSONU = 296,               /* SATIRSONU  */
+    DAIRE_CIZ = 297,               /* DAIRE_CIZ  */
+    DIKDORTGEN_CIZ = 298,          /* DIKDORTGEN_CIZ  */
+    UCGEN_CIZ = 299,               /* UCGEN_CIZ  */
+    CIZGI_CIZ = 300                /* CIZGI_CIZ  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 9 "cizim.y"
+
+    int ival;
+    double dval;
+    char* sval;
+
+#line 115 "cizim.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
