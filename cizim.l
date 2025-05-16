@@ -1,81 +1,56 @@
 %{
-    #include "cizim.tab.h"
-    #undef yywrap
+#include "cizim.tab.h"
 %}
-
 %option noyywrap
-%option yylineno
-
 %%
+"<-"    {return ATAMA;}
+"+"  {return TOPLA;}
+"-"  {return CIKAR;}
+"*"  {return CARP;}
+"/"  {return BOL;}
+"%"  {return MOD;}
+"^"  {return US;}
+"<"  {return KUCUK;}
+"<="  {return KUCUK_ESIT;}
+">"  {return BUYUK;}
+">="  {return BUYUK_ESIT;}
+"="  {return ESIT;}
+"<>"  {return FARKLI;}
+":"  {return IKI_NOKTA;}
+"eger"  {return EGER;}
+"ise"  {return ISE;}
+"aksi halde"  {return AKSI_HALDE;}
+"dongu"  {return DONGU;}
+"iken"  {return IKEN;}
+"neki"  {return NEKI;}
+"(" {return PARANTEZ_AC;}
+")" {return PARANTEZ_KAPA;}
+"dogru" {return DOGRU;}
+"yanlis" {return YANLIS;}
+"ve" {return VE;}
+"veya" {return VEYA;}
+"degil" {return DEGIL;}
+"fonk" {return FONK;}
+"knof" {return KNOF;}
+"dondur"  { return DONDUR; }
+"int"    { return INT; }
+"string" { return STRING; }
 
-"<-"            { return ATAMA; }
-"+"             { return TOPLA; }
-"-"             { return CIKAR; }
-"*"             { return CARP; }
-"/"             { return BOL; }
-"%"             { return MOD; }
-"^"             { return US; }
 
-"<="            { return KUCUK_ESIT; }
-">="            { return BUYUK_ESIT; }
-"<>"            { return FARKLI; }
-"<"             { return KUCUK; }
-">"             { return BUYUK; }
-"="             { return ESIT; }
+"tusyukari"     { printf("yukari tusa basildi");return TUS_YUKARI; }
+"tusasagi"      { printf("asagi tusa basildi");return TUS_ASAGI; }
+"tussola"       { printf("sola tusa basildi");return TUS_SOLA; }
+"tussaga"       { printf("sag tusa basildi");return TUS_SAGA; }
 
-"eger"          { return EGER; }
-"ise"           { return ISE; }
-"aksi halde"    { return AKSI_HALDE; }
-"dongu"         { return DONGU; }
-"iken"          { return IKEN; }
-"neki"          { return NEKI; }
+"daire_ciz"       { printf("daire cizilir"); return DAIRE_CIZ; }
+"dikdortgen_ciz"  { printf("dikdortgen cizilir");return DIKDORTGEN_CIZ; }
+"ucgen_ciz"       { printf("ucgen cizilir");return UCGEN_CIZ; }
+"cizgi_ciz"       { printf("cizgi cizilir");return CIZGI_CIZ; }
 
-"tusyukari"     { return TUS_YUKARI; }
-"tusasagi"      { return TUS_ASAGI; }
-"tussola"       { return TUS_SOLA; }
-"tussaga"       { return TUS_SAGA; }
 
-"daire_ciz"       { return DAIRE_CIZ; }
-"dikdortgen_ciz"  { return DIKDORTGEN_CIZ; }
-"ucgen_ciz"       { return UCGEN_CIZ; }
-"cizgi_ciz"       { return CIZGI_CIZ; }
-
-","              { return ','; }
-"("              { return PARANTEZ_AC; }
-")"              { return PARANTEZ_KAPA; }
-"{"              { return BLOK_BAS; }
-"}"              { return BLOK_BIT; }
-
-[0-9]+(\.[0-9]+)?  { 
-                    // Sayı ise ondalıklı mı kontrol et
-                    if (strchr(yytext, '.') != NULL) {
-                        yylval.dval = atof(yytext);
-                        return ONDALIK;
-                    } else {
-                        yylval.ival = atoi(yytext);
-                        return TAMSAYI;
-                    }
-                  }
-
-\"([^\\\"]|\\.)*\"  { 
-                    // Metin türü için tırnak içindeki metin
-                    yylval.sval = strdup(yytext);
-                    return METIN;
-                  }
-
-[a-zA-Z_][a-zA-Z0-9_]*  { 
-                    // ID token'ı için
-                    yylval.sval = strdup(yytext);
-                    return ID; 
-                  }
-
-\n              { return SATIRSONU; }
-[ \t\r]+        { /* boşlukları yut */ }
-
-.               { return yytext[0]; } // Diğer tek karakterleri döndür
-
+[0-9]+(\.[0-9]+)?  { return SAYI;}
+[a-zA-Z_][a-zA-Z0-9_]*    {return ID;}
+[ \t] {}
+"--".* {}
+.   {return yytext[0];}
 %%
-
-int yywrap(void) {
-    return 1;
-}

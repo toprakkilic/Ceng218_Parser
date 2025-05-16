@@ -1,0 +1,15 @@
+eger a > 5 ise
+b <- 10
+aksi halde
+b <- 0
+
+
+fonk topla(x, y) {
+    dondur x + y
+}
+
+sonuc <- topla(3, 4)
+
+dongu a <> 0 iken
+    a <- a - 1
+neki

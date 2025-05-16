@@ -1,76 +1,69 @@
 %{
 #include <stdio.h>
+
 void yyerror(const char *s);
 int yylex(void);
 extern int yylineno;
 
 %}
-
-%union {
-    int ival;
-    double dval;
-    char* sval;
-}
-
-
 %token ATAMA
+%token ID SAYI
 %token TOPLA CIKAR CARP BOL MOD US
-%token KUCUK BUYUK KUCUK_ESIT BUYUK_ESIT ESIT FARKLI
+%token ESIT KUCUK KUCUK_ESIT BUYUK BUYUK_ESIT FARKLI
 %token VE VEYA DEGIL
-%token <ival> TAMSAYI
-%token <dval> ONDALIK
-%token <sval> METIN
-%token <sval> ID
-%token BLOK_BAS BLOK_BIT
-%token EGER ISE AKSI_HALDE 
+%token BLOK_AC BLOK_KAPA
+%token EGER ISE AKSI_HALDE
 %token DONGU IKEN NEKI
 %token FONK KNOF IKI_NOKTA DONDUR
-%token TUS_YUKARI TUS_ASAGI TUS_SOLA TUS_SAGA
 %token PARANTEZ_AC PARANTEZ_KAPA
-%token SATIRSONU
+%token DOGRU YANLIS
 %token DAIRE_CIZ DIKDORTGEN_CIZ UCGEN_CIZ CIZGI_CIZ
-
-
-%left VEYA
-%left VE
-%right DEGIL
-%left TOPLA CIKAR
-%left CARP BOL MOD
-%right US
+%token TUS_YUKARI TUS_ASAGI TUS_SOLA TUS_SAGA
+%token INT STRING
 
 
 %%
 program:
-     /* boş */
-    |program SATIRSONU
-    | program komut SATIRSONU
+    komut
+    | program komut
 ;
 
 komut:
     atama
     | eger
-    | dongu
-    | fonksiyon
-    | tuslar
-    | fonksiyon_cagirma
-    | blok
-    | cizim_komut
+    | fonksiyon_cagrisi
+    | fonksiyon_tanim
     | dondur
-    | degisken_bildirimi
+    | cizim_komut
+    | tuslar
+    | tipli_degisken_bildirimi
+;
+atama: ID ATAMA ifade;
+
+fonksiyon_cagrisi: ID ifade_listesi;
+
+ifade_listesi: 
+    | ifade
+    | ifade_listesi ifade
 ;
 
-dongu: DONGU kosul IKEN komut_listesi NEKI;
+fonksiyon_tanim: FONK ID parametre_listesi IKI_NOKTA komut_listesi KNOF;
 
 komut_listesi:
     komut
     | komut_listesi komut;
 
+parametre_listesi:
+    ID
+    | parametre_listesi ID
+;
 eger: EGER kosul ISE komut AKSI_HALDE komut;
 
 kosul:
-    kosul VE kosul
+    DOGRU
+    | YANLIS
+    | kosul VE kosul
     | kosul VEYA kosul
-    | DEGIL kosul
     | ifade ESIT ifade
     | ifade FARKLI ifade
     | ifade KUCUK ifade
@@ -79,97 +72,63 @@ kosul:
     | ifade BUYUK_ESIT ifade
 ;
 
-atama: ID ATAMA ifade;
-
 ifade:
     terim
     | ifade TOPLA terim
     | ifade CIKAR terim
 ;
-
-terim: 
+terim:
     faktor
     | terim CARP faktor
     | terim BOL faktor
     | terim MOD faktor
-    | terim US faktor
 ;
-
-faktor: 
-    TAMSAYI
-  | ONDALIK
-  | ID
-  | PARANTEZ_AC ifade PARANTEZ_KAPA
-;
-
-fonksiyon:
-    FONK ID PARANTEZ_AC parametreler PARANTEZ_KAPA BLOK_BAS komut_listesi BLOK_BIT
-;
-
-parametreler:
-    /* boş */
+faktor:
+    SAYI
     | ID
-    | parametreler ',' ID
+    | PARANTEZ_AC ifade PARANTEZ_KAPA
+;
+dondur: 
+    DONDUR ifade
 ;
 
-fonksiyon_cagirma:
-    ID PARANTEZ_AC argumanlar PARANTEZ_KAPA
-;
-
-argumanlar:
-    /* boş */
-    | ifade
-    | argumanlar ',' ifade
+cizim_komut:
+      DAIRE_CIZ ifade ifade ifade
+    | DIKDORTGEN_CIZ ifade ifade ifade ifade
+    | UCGEN_CIZ ifade ifade ifade ifade ifade ifade
+    | CIZGI_CIZ ifade ifade ifade ifade
 ;
 
 tuslar:
-    TUS_YUKARI
+      TUS_YUKARI
     | TUS_ASAGI
     | TUS_SOLA
     | TUS_SAGA
 ;
 
-blok:
-    BLOK_BAS komut_listesi BLOK_BIT
+tip:
+    INT
+    | STRING
 ;
 
-cizim_komut:
-    DAIRE_CIZ ifade ifade ifade
-  | DIKDORTGEN_CIZ ifade ifade ifade ifade
-  | UCGEN_CIZ ifade ifade ifade ifade ifade ifade
-  | CIZGI_CIZ ifade ifade ifade ifade
-;
-
-dondur:
-    DONDUR ifade
-;
-
-tur:
-    TAMSAYI
-  | ONDALIK
-  | METIN
-;
-
-degisken_bildirimi:
-    tur ID SATIRSONU
-  | tur ID ATAMA ifade SATIRSONU
+tipli_degisken_bildirimi:
+    tip ID
+    | tip ID ATAMA ifade
 ;
 
 %%
 
 int hata = 0;
 
-
 int main() {
-    yyparse(); 
+    yyparse();
     if(hata == 0){
-        printf("dogru kanka");
+        printf("Doğru kanka\n");
     }
-
+    return 0;
 }
 
-void yyerror(const char *s)
-{
-  fprintf(stderr, "%d. satırda hata: %s\n", yylineno, s);
-  hata = 1;
+void yyerror(const char *s) {
+    fprintf(stderr, "%d. satırda hata: %s\n", yylineno, s);
+    hata = 1;
 }

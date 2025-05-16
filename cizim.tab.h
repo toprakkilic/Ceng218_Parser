@@ -55,66 +55,56 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     ATAMA = 258,                   /* ATAMA  */
-    TOPLA = 259,                   /* TOPLA  */
-    CIKAR = 260,                   /* CIKAR  */
-    CARP = 261,                    /* CARP  */
-    BOL = 262,                     /* BOL  */
-    MOD = 263,                     /* MOD  */
-    US = 264,                      /* US  */
-    KUCUK = 265,                   /* KUCUK  */
-    BUYUK = 266,                   /* BUYUK  */
-    KUCUK_ESIT = 267,              /* KUCUK_ESIT  */
-    BUYUK_ESIT = 268,              /* BUYUK_ESIT  */
-    ESIT = 269,                    /* ESIT  */
-    FARKLI = 270,                  /* FARKLI  */
-    VE = 271,                      /* VE  */
-    VEYA = 272,                    /* VEYA  */
-    DEGIL = 273,                   /* DEGIL  */
-    TAMSAYI = 274,                 /* TAMSAYI  */
-    ONDALIK = 275,                 /* ONDALIK  */
-    METIN = 276,                   /* METIN  */
-    ID = 277,                      /* ID  */
-    BLOK_BAS = 278,                /* BLOK_BAS  */
-    BLOK_BIT = 279,                /* BLOK_BIT  */
-    EGER = 280,                    /* EGER  */
-    ISE = 281,                     /* ISE  */
-    AKSI_HALDE = 282,              /* AKSI_HALDE  */
-    DONGU = 283,                   /* DONGU  */
-    IKEN = 284,                    /* IKEN  */
-    NEKI = 285,                    /* NEKI  */
-    FONK = 286,                    /* FONK  */
-    KNOF = 287,                    /* KNOF  */
-    IKI_NOKTA = 288,               /* IKI_NOKTA  */
-    DONDUR = 289,                  /* DONDUR  */
-    TUS_YUKARI = 290,              /* TUS_YUKARI  */
-    TUS_ASAGI = 291,               /* TUS_ASAGI  */
-    TUS_SOLA = 292,                /* TUS_SOLA  */
-    TUS_SAGA = 293,                /* TUS_SAGA  */
-    PARANTEZ_AC = 294,             /* PARANTEZ_AC  */
-    PARANTEZ_KAPA = 295,           /* PARANTEZ_KAPA  */
-    SATIRSONU = 296,               /* SATIRSONU  */
-    DAIRE_CIZ = 297,               /* DAIRE_CIZ  */
-    DIKDORTGEN_CIZ = 298,          /* DIKDORTGEN_CIZ  */
-    UCGEN_CIZ = 299,               /* UCGEN_CIZ  */
-    CIZGI_CIZ = 300                /* CIZGI_CIZ  */
+    ID = 259,                      /* ID  */
+    SAYI = 260,                    /* SAYI  */
+    TOPLA = 261,                   /* TOPLA  */
+    CIKAR = 262,                   /* CIKAR  */
+    CARP = 263,                    /* CARP  */
+    BOL = 264,                     /* BOL  */
+    MOD = 265,                     /* MOD  */
+    US = 266,                      /* US  */
+    ESIT = 267,                    /* ESIT  */
+    KUCUK = 268,                   /* KUCUK  */
+    KUCUK_ESIT = 269,              /* KUCUK_ESIT  */
+    BUYUK = 270,                   /* BUYUK  */
+    BUYUK_ESIT = 271,              /* BUYUK_ESIT  */
+    FARKLI = 272,                  /* FARKLI  */
+    VE = 273,                      /* VE  */
+    VEYA = 274,                    /* VEYA  */
+    DEGIL = 275,                   /* DEGIL  */
+    BLOK_AC = 276,                 /* BLOK_AC  */
+    BLOK_KAPA = 277,               /* BLOK_KAPA  */
+    EGER = 278,                    /* EGER  */
+    ISE = 279,                     /* ISE  */
+    AKSI_HALDE = 280,              /* AKSI_HALDE  */
+    DONGU = 281,                   /* DONGU  */
+    IKEN = 282,                    /* IKEN  */
+    NEKI = 283,                    /* NEKI  */
+    FONK = 284,                    /* FONK  */
+    KNOF = 285,                    /* KNOF  */
+    IKI_NOKTA = 286,               /* IKI_NOKTA  */
+    DONDUR = 287,                  /* DONDUR  */
+    PARANTEZ_AC = 288,             /* PARANTEZ_AC  */
+    PARANTEZ_KAPA = 289,           /* PARANTEZ_KAPA  */
+    DOGRU = 290,                   /* DOGRU  */
+    YANLIS = 291,                  /* YANLIS  */
+    DAIRE_CIZ = 292,               /* DAIRE_CIZ  */
+    DIKDORTGEN_CIZ = 293,          /* DIKDORTGEN_CIZ  */
+    UCGEN_CIZ = 294,               /* UCGEN_CIZ  */
+    CIZGI_CIZ = 295,               /* CIZGI_CIZ  */
+    TUS_YUKARI = 296,              /* TUS_YUKARI  */
+    TUS_ASAGI = 297,               /* TUS_ASAGI  */
+    TUS_SOLA = 298,                /* TUS_SOLA  */
+    TUS_SAGA = 299,                /* TUS_SAGA  */
+    INT = 300,                     /* INT  */
+    STRING = 301                   /* STRING  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 9 "cizim.y"
-
-    int ival;
-    double dval;
-    char* sval;
-
-#line 115 "cizim.tab.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
