@@ -20,6 +20,7 @@ extern int yylineno;
 %token DAIRE_CIZ DIKDORTGEN_CIZ UCGEN_CIZ CIZGI_CIZ
 %token TUS_YUKARI TUS_ASAGI TUS_SOLA TUS_SAGA
 %token INT STRING
+%token TUS_BASILDI
 
 
 %%
@@ -35,8 +36,10 @@ komut:
     | fonksiyon_tanim
     | dondur
     | cizim_komut
-    | tuslar
     | tipli_degisken_bildirimi
+    | blok_komutlar
+    | tus_basildi_kontrol
+    | dongu
 ;
 atama: ID ATAMA ifade;
 
@@ -82,6 +85,7 @@ terim:
     | terim CARP faktor
     | terim BOL faktor
     | terim MOD faktor
+    | terim US faktor
 ;
 faktor:
     SAYI
@@ -99,11 +103,11 @@ cizim_komut:
     | CIZGI_CIZ ifade ifade ifade ifade
 ;
 
-tuslar:
-      TUS_YUKARI
-    | TUS_ASAGI
-    | TUS_SOLA
-    | TUS_SAGA
+tus_basildi_kontrol:
+      TUS_BASILDI TUS_YUKARI
+    | TUS_BASILDI TUS_ASAGI
+    | TUS_BASILDI TUS_SOLA
+    | TUS_BASILDI TUS_SAGA
 ;
 
 tip:
@@ -116,6 +120,13 @@ tipli_degisken_bildirimi:
     | tip ID ATAMA ifade
 ;
 
+blok_komutlar:
+    BLOK_AC komut_listesi BLOK_KAPA
+;
+
+dongu: DONGU kosul IKEN komut_listesi NEKI;
+
+
 %%
 
 int hata = 0;
@@ -123,7 +134,7 @@ int hata = 0;
 int main() {
     yyparse();
     if(hata == 0){
-        printf("Doğru kanka\n");
+        printf("Doğru\n");
     }
     return 0;
 }

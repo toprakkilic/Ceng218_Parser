@@ -97,7 +97,8 @@ extern int yydebug;
     TUS_SOLA = 298,                /* TUS_SOLA  */
     TUS_SAGA = 299,                /* TUS_SAGA  */
     INT = 300,                     /* INT  */
-    STRING = 301                   /* STRING  */
+    STRING = 301,                  /* STRING  */
+    TUS_BASILDI = 302              /* TUS_BASILDI  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

@@ -3,7 +3,7 @@
 %}
 %option noyywrap
 %%
-"<-"    {return ATAMA;}
+"ü"    {return ATAMA;}
 "+"  {return TOPLA;}
 "-"  {return CIKAR;}
 "*"  {return CARP;}
@@ -19,7 +19,7 @@
 ":"  {return IKI_NOKTA;}
 "eger"  {return EGER;}
 "ise"  {return ISE;}
-"aksi halde"  {return AKSI_HALDE;}
+"aksi_halde"  {return AKSI_HALDE;}
 "dongu"  {return DONGU;}
 "iken"  {return IKEN;}
 "neki"  {return NEKI;}
@@ -35,8 +35,11 @@
 "dondur"  { return DONDUR; }
 "int"    { return INT; }
 "string" { return STRING; }
+"{"   { return BLOK_AC; }
+"}"   { return BLOK_KAPA; }
 
 
+"tus_basildi" { return TUS_BASILDI; }
 "tusyukari"     { printf("yukari tusa basildi");return TUS_YUKARI; }
 "tusasagi"      { printf("asagi tusa basildi");return TUS_ASAGI; }
 "tussola"       { printf("sola tusa basildi");return TUS_SOLA; }
