@@ -1,0 +1,3 @@
+eger tus_basildi tusyukari ise{
+    oyuncu y << oyuncu y + 1
+}

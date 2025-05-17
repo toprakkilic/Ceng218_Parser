@@ -60,7 +60,7 @@ parametre_listesi:
     ID
     | parametre_listesi ID
 ;
-eger: EGER kosul ISE komut AKSI_HALDE komut;
+eger: EGER kosul ISE blok_komutlar AKSI_HALDE blok_komutlar;
 
 kosul:
     DOGRU
@@ -124,7 +124,7 @@ blok_komutlar:
     BLOK_AC komut_listesi BLOK_KAPA
 ;
 
-dongu: DONGU kosul IKEN komut_listesi NEKI;
+dongu: DONGU kosul IKEN blok_komutlar NEKI;
 
 
 %%
@@ -134,12 +134,12 @@ int hata = 0;
 int main() {
     yyparse();
     if(hata == 0){
-        printf("Doğru\n");
+        printf("[DOĞRU] Kod gramer kurallarına uygundur.\n");
     }
     return 0;
 }
 
 void yyerror(const char *s) {
-    fprintf(stderr, "%d. satırda hata: %s\n", yylineno, s);
+    fprintf(stderr, "%d NUMARALI SATIRDA HATA: %s\n", yylineno, s);
     hata = 1;
 }

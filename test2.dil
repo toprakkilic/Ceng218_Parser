@@ -1,0 +1,9 @@
+dongu x <> 1 iken{
+    eger x % 2 = 0 ise{
+        x << x - 2
+    }
+    olmazsa{
+        x << 3 * x - 1
+    }
+}
+neki

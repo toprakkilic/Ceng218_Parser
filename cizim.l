@@ -3,7 +3,7 @@
 %}
 %option noyywrap
 %%
-"ü"    {return ATAMA;}
+"<<"    {return ATAMA;}
 "+"  {return TOPLA;}
 "-"  {return CIKAR;}
 "*"  {return CARP;}
@@ -19,7 +19,7 @@
 ":"  {return IKI_NOKTA;}
 "eger"  {return EGER;}
 "ise"  {return ISE;}
-"aksi_halde"  {return AKSI_HALDE;}
+"olmazsa"  {return AKSI_HALDE;}
 "dongu"  {return DONGU;}
 "iken"  {return IKEN;}
 "neki"  {return NEKI;}
@@ -30,8 +30,8 @@
 "ve" {return VE;}
 "veya" {return VEYA;}
 "degil" {return DEGIL;}
-"fonk" {return FONK;}
-"knof" {return KNOF;}
+"fonksiyon" {return FONK;}
+"bitir" {return KNOF;}
 "dondur"  { return DONDUR; }
 "int"    { return INT; }
 "string" { return STRING; }
@@ -54,6 +54,6 @@
 [0-9]+(\.[0-9]+)?  { return SAYI;}
 [a-zA-Z_][a-zA-Z0-9_]*    {return ID;}
 [ \t] {}
-"--".* {}
+"#".*  {}
 .   {return yytext[0];}
 %%
