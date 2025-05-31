@@ -1,3 +1,21 @@
+fonksiyon oyuncu_cizdir x y :
+    daire_ciz x y 5
+bitir
+
 eger tus_basildi tusyukari ise{
-    oyuncu y << oyuncu y + 1
-}
+        y +<< 2
+    }
+
+eger tus_basildi tusasagi ise{
+        y << y - 2
+    }
+
+eger tus_basildi tussaga ise{
+        x << x + 2
+    }
+
+eger tus_basildi tussola ise{
+        x << x - 2
+    }
+
+oyuncu_cizdir x y

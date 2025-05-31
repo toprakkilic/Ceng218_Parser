@@ -1,2 +1,6 @@
---açıklama satırı
+--yorum satırı
+# bu da bir yorum satırı
 x << x + 3
+x -<< 3 #buradan sonrası yorum kabul ediliyor
+int x -<< 3 #bu ifade  yanlış
+daire_ciz 10 10 10 #yorum

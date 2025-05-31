@@ -7,7 +7,7 @@ extern int yylineno;
 
 %}
 %token ATAMA
-%token ID SAYI
+%token ID SAYI METIN
 %token TOPLA CIKAR CARP BOL MOD US
 %token ESIT KUCUK KUCUK_ESIT BUYUK BUYUK_ESIT FARKLI
 %token VE VEYA DEGIL
@@ -21,6 +21,7 @@ extern int yylineno;
 %token TUS_YUKARI TUS_ASAGI TUS_SOLA TUS_SAGA
 %token INT STRING
 %token TUS_BASILDI
+%token ARTTIR_ATAMA EKSILT_ATAMA
 
 
 %%
@@ -41,7 +42,11 @@ komut:
     | tus_basildi_kontrol
     | dongu
 ;
-atama: ID ATAMA ifade;
+atama:
+    ID ATAMA ifade
+    | ID EKSILT_ATAMA ifade
+    | ID ARTTIR_ATAMA ifade
+    ;
 
 fonksiyon_cagrisi: ID ifade_listesi;
 
@@ -60,7 +65,10 @@ parametre_listesi:
     ID
     | parametre_listesi ID
 ;
-eger: EGER kosul ISE blok_komutlar AKSI_HALDE blok_komutlar;
+eger: 
+    EGER kosul ISE blok_komutlar
+    | EGER kosul ISE blok_komutlar AKSI_HALDE blok_komutlar
+;
 
 kosul:
     DOGRU
@@ -73,6 +81,7 @@ kosul:
     | ifade KUCUK_ESIT ifade
     | ifade BUYUK ifade
     | ifade BUYUK_ESIT ifade
+    | tus_basildi_kontrol
 ;
 
 ifade:
@@ -91,6 +100,7 @@ faktor:
     SAYI
     | ID
     | PARANTEZ_AC ifade PARANTEZ_KAPA
+    | METIN
 ;
 dondur: 
     DONDUR ifade

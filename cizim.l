@@ -3,7 +3,10 @@
 %}
 %option noyywrap
 %%
+\n           { yylineno++; }
 "<<"    {return ATAMA;}
+"-<<"   { return EKSILT_ATAMA; }
+"+<<"   { return ARTTIR_ATAMA; }
 "+"  {return TOPLA;}
 "-"  {return CIKAR;}
 "*"  {return CARP;}
@@ -40,20 +43,22 @@
 
 
 "tus_basildi" { return TUS_BASILDI; }
-"tusyukari"     { printf("yukari tusa basildi");return TUS_YUKARI; }
-"tusasagi"      { printf("asagi tusa basildi");return TUS_ASAGI; }
-"tussola"       { printf("sola tusa basildi");return TUS_SOLA; }
-"tussaga"       { printf("sag tusa basildi");return TUS_SAGA; }
+"tusyukari"     { printf("yukari tusa basildi \n");return TUS_YUKARI; }
+"tusasagi"      { printf("asagi tusa basildi \n");return TUS_ASAGI; }
+"tussola"       { printf("sola tusa basildi \n");return TUS_SOLA; }
+"tussaga"       { printf("sag tusa basildi\n");return TUS_SAGA; }
 
-"daire_ciz"       { printf("daire cizilir"); return DAIRE_CIZ; }
-"dikdortgen_ciz"  { printf("dikdortgen cizilir");return DIKDORTGEN_CIZ; }
-"ucgen_ciz"       { printf("ucgen cizilir");return UCGEN_CIZ; }
-"cizgi_ciz"       { printf("cizgi cizilir");return CIZGI_CIZ; }
+"daire_ciz"       { printf("Daire Cizilir \n"); return DAIRE_CIZ; }
+"dikdortgen_ciz"  { printf("Dikdortgen Cizilir \n");return DIKDORTGEN_CIZ; }
+"ucgen_ciz"       { printf("Ucgen Cizilir \n");return UCGEN_CIZ; }
+"cizgi_ciz"       { printf("Cizgi Cizilir \n");return CIZGI_CIZ; }
 
 
 [0-9]+(\.[0-9]+)?  { return SAYI;}
+\"([^\\\"]|\\.)*\"  { return METIN; }
 [a-zA-Z_][a-zA-Z0-9_]*    {return ID;}
 [ \t] {}
-"#".*  {}
+"#".* { }
+"--".* { }
 .   {return yytext[0];}
 %%
